@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="profile-container">
+    <p>Your Profile Picture</p>
+    <div class="profile-image-section">
+        {% if user.profile.profile_picture %}
+        <img id="profileImagePreview" src="{{ user.profile.profile_picture.url }}" alt="Profile Image" style="width: 100px; height: 100px; border-radius: 50%;">
+        {% else %}
+        <img id="profileImagePreview" src="{% static 'profiles/def.jpg' %}" alt="Profile Image" style="width: 100px; height: 100px; border-radius: 50%;">
+        {% endif %}
+        <form id="profile-picture-form" method="POST" enctype="multipart/form-data" action="{% url 'profile' %}">
+            {% csrf_token %}
+            <div class="image-buttons">
+                <input type="file" id="profile-picture-input" name="profile_picture" style="display: none;">
+                <button type="button" class="upload-btn" onclick="document.getElementById('profile-picture-input').click();">Upload New</button>
+                <button type="button" class="remove-btn" onclick="removeProfilePicture();">Remove Profile Picture</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('profile-picture-input').addEventListener('change', function() {
+        const form = document.getElementById('profile-picture-form');
+        const formData = new FormData(form);
+    
+        fetch('/upload-profile-picture/', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                document.getElementById('profileImagePreview').src = data.profile_picture_url;
+            } else {
+                console.error('Failed to upload profile picture');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+
+    function removeProfilePicture() {
+        fetch('/remove-profile-picture/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: JSON.stringify({})
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const defaultImageUrl = '/media/profiles/def.jpg';
+                const timestamp = new Date().getTime();
+                document.getElementById('profileImagePreview').src = `${defaultImageUrl}?t=${timestamp}`;
+            } else {
+                console.error('Failed to remove profile picture');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+</script>
+        
+
+        <form id="profileForm" method="POST">
+            {% csrf_token %}
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="name">Full name</label>
+                    <div class="input-container">
+                        <input type="text" id="name" name="name" placeholder="Christine Brown" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <div class="input-container">
+                        <input type="text" id="username" name="username" placeholder="christinebrown" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <div class="input-verified input-container">
+                        <input type="email" id="email" name='email' placeholder="christinebrown@gmail.com" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber">Phone number</label>
+                    <div class="input-verified input-container">
+                        <input type="tel" id="phoneNumber" name="phone" placeholder="+1 945-913-2196" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="bio">Bio</label>
+                <textarea id="bio" class="bio" name="bio" rows="6" placeholder="Senior blog writer at Hamill Group..."></textarea>
+            </div>
+            <button type="submit"name='info'class="update-profile-btn">Update Profile</button>
+        </form>
+    </div>
+
+{% endblock %}

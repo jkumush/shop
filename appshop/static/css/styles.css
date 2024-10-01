@@ -1,0 +1,202 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f8f9;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: hsl(40, 100%, 72%);
+    color: white;
+    position: relative;
+}
+
+.search-container {
+    width: 50%;
+    margin-left: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-bar {
+    width: 100%;
+    padding: 2px 10px;
+    border: white;
+    border-radius: 60px;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 4px solid;
+    background: white;
+}
+.search-bar input {
+    flex: 1;
+    border: none;
+    padding: 10px 10px;
+    width: 80px;
+    font-size: 16px;
+    outline: none;
+    background: white;
+}
+
+.search-bar button img {
+    width: 25px;
+}
+.search-bar button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.user-image-container {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.user-image {
+    margin-left: auto;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-container {
+    background-color: white;
+    padding: 40px;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border-radius: 0;
+    box-shadow: none;
+
+}
+
+p {
+    color: gray;
+    font-weight: normal;
+    margin-bottom: 30px;
+}
+
+.profile-image-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#profileImagePreview {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+.profile-pic {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.image-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.comment-message {
+    max-width: 100%; /* Allow the width to adjust based on the content */
+    padding: 5px; /* Adjust the padding as needed */
+    word-wrap: break-word; /* Break long words */
+    word-break: break-all; /* Break long words */
+    white-space: normal; /* Allow text to wrap */
+}
+
+.upload-btn, .remove-btn {
+    background-color: hsl(49, 89%, 53%);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.remove-btn {
+    background-color: #9e9e9e;
+}
+
+.upload-btn:hover, .remove-btn:hover {
+    opacity: 0.8;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-grid input[type="text"], input[type="tel"], input[type="email"], textarea {
+    width: 70%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+    outline: none;
+}
+
+.input-container {
+    max-width: 100%; /* Adjust the max-width as needed */
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 40% 40%;
+    margin-bottom: 20px;
+}
+
+.bio {
+    width: 55%;
+}
+
+.update-profile-btn {
+    width: 25%;
+    padding: 15px;
+    background-color: hsl(40, 100%, 72%);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.update-profile-btn:hover {
+    opacity: 0.9;
+}
+
+#profilePreview {
+    margin-top: 30px;
+    text-align: center;
+}
+
+#previewImage {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
